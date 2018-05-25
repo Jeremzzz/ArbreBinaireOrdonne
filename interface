@@ -1,0 +1,9 @@
+public interface ArbreBinaire<T>{
+	public ArbreBinaireChaine( T valeur , ArbreBinaire<T> sag, ArbreBinaire<T> sad);
+	public ArbreBinaire<T> sag();
+	public ArbreBinaire<T> sad();
+	public boolean estVide();
+	public void ecrireArbre();
+	private void ecrireArbre(ArbreBinaire a);
+	
+}

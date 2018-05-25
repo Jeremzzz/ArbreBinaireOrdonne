@@ -1,0 +1,90 @@
+@SuppressWarnings("unchecked")
+public class  ArbreBinaireChaine<T> implements ArbreBinaire<T>{
+	private T valeur;
+	private ArbreBinaire<T> sag, sad;
+	
+	public ArbreBinaireChaine( T valeur , ArbreBinaire<T> sag, ArbreBinaire<T> sad) {
+		this.valeur = valeur;
+		this.sag=sag;
+		this.sad=sad;
+	}
+	
+	public static final ArbreBinaire arbreVide = new ArbreBinaireChaine();
+	
+			
+	
+	public ArbreBinaireChaine( T valeur ) {
+		this.valeur = valeur;
+		this.sag=ArbreBinaireChaine.arbreVide;
+		this.sad=ArbreBinaireChaine.arbreVide;
+	}
+	
+	
+	
+	
+	public ArbreBinaireChaine() {
+		this.valeur = null;
+		this.sag=ArbreBinaireChaine.arbreVide;
+		this.sad=ArbreBinaireChaine.arbreVide;
+	}
+	
+	
+	public T valeur() {
+		return this.valeur;
+	}
+	
+	
+	
+	
+	public ArbreBinaire<T> sag() {
+		return this.sag;
+	}
+	
+	public ArbreBinaire<T> sad() {
+		return this.sad;
+	}
+	
+	
+	public boolean estVide() {
+		return this==ArbreBinaireChaine.arbreVide;
+	}
+	public void  ecrireArbre() {
+		System.out.println(this);
+		System.out.println("\n");
+	}
+
+
+	
+	private void  ecrireArbre(ArbreBinaireChaine a) {
+		if (!a.estVide()) {
+			System.out.println("(");
+			System.out.println(a.valeur().toString());
+			System.out.println(a.sag().toString());
+			System.out.println(a.sad().toString());
+			System.out.println(")");
+		}
+		
+		
+	}
+	
+	public int hauteur(ArbreBinaire a) {
+		
+		if (a.sag().estVide() && a.sad().estVide()) {
+			return 0;
+		}
+		else return hauteur(a)+1;
+		
+	}
+	
+	
+	public void ajouter(T valeurAjouter){
+		if(this.val) {
+			return ArbreBinaireChaine(valeurAjouter);
+		}
+		elseif((this.sag().estVide()) && (this.valeur().compareTo(valeurAjouter)>0)){
+			
+		}
+	}
+	
+
+}

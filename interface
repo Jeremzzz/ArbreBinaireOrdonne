@@ -1,9 +1,12 @@
-public interface ArbreBinaire<T>{
-	public ArbreBinaireChaine( T valeur , ArbreBinaire<T> sag, ArbreBinaire<T> sad);
+package td7;
+
+public interface ArbreBinaire<T> {
+	public T valeur();
 	public ArbreBinaire<T> sag();
 	public ArbreBinaire<T> sad();
 	public boolean estVide();
 	public void ecrireArbre();
-	private void ecrireArbre(ArbreBinaire a);
-	
+	public void ajouter(T valeurAjouter);
+	public  boolean rechercher(T valeurRechercher);
+	public void supprimer(T valeurSupprimer);
 }

@@ -1,0 +1,75 @@
+package td7;
+import java.util.*;
+import PaD.*;
+	public class DessinArbre<T> {
+		public static <T extends  Comparable <T>> void main(String[] args) throws Exception {
+			ArbreBinaireChaine<Integer> Arbre= new ArbreBinaireChaine<Integer>();
+			Scanner sc= new Scanner(System.in);
+			Integer n =sc.nextInt();
+			
+			Arbre.ajouter(n);
+			Arbre.rechercher(n);
+			Integer z=n-1;
+			Arbre.ajouter(z);
+			
+			Arbre.ecrireArbre();
+			
+			
+			
+			
+			
+			
+			
+			
+
+//			boolean continuer =true;
+//			while(continuer) {
+//				System.out.println("Que voulez vous faire? ajouter?(1) supprimer?(2)");
+//				Scanner sc= new Scanner(System.in);
+//				int n =sc.nextInt();// renvoie le String essai
+//				if(n==1) {
+//					System.out.println("Quel valeur?");
+//					Scanner si= new Scanner(System.in);
+//					int q= si.nextInt();
+//					ArbreBinaireChaine<> A= new ArbreBinaireChaine(q);
+//					Ajouter();
+//					System.out.println("Voulez-vous continuer?(O/N)");
+//					Scanner su= new Scanner(System.in);
+//					String z= su.next();
+//					if(z=="N") {
+//						continuer =false;
+//						System.out.println("fin");
+//						break;
+//					}else {
+//						continuer =true;
+//						break;
+//					}
+//				
+//				}else if(n==2){
+//				System.out.println("supprimer");
+//				}else if(n==3){
+//				System.out.println("rechercher");
+//				}
+//				sc.close();
+//			}
+
+		}
+		
+		
+		
+		public static  void Ajouter() {
+			PlancheADessin  pad = new PlancheADessin ();
+			double milieu = pad.getLargeur ()/2;
+			Dessinable valeur1 = new Texte ( milieu-10 ,62 , "2");
+			pad.ajouter(valeur1);
+			}
+
+	}
+//		public static void DessinArbreVide() {
+//			PlancheADessin  pad = new PlancheADessin ();
+//			double milieu = pad.getLargeur ()/2;
+//			Dessinable  arbre = new CerclePlein(milieu , 80, 60,  PlancheADessin.GRIS_CLAIR );
+//
+//			pad.ajouter(arbre);
+//		}
+

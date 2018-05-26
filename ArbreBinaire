@@ -1,90 +1,109 @@
+package td7;
+
+import java.util.Scanner;
+import PaD.*;
 @SuppressWarnings("unchecked")
-public class  ArbreBinaireChaine<T> implements ArbreBinaire<T>{
+public class ArbreBinaireChaine<T extends Comparable> implements ArbreBinaire<T> {
 	private T valeur;
-	private ArbreBinaire<T> sag, sad;
+	private ArbreBinaire<T> sag;
+	private ArbreBinaire<T>sad;
 	
-	public ArbreBinaireChaine( T valeur , ArbreBinaire<T> sag, ArbreBinaire<T> sad) {
-		this.valeur = valeur;
-		this.sag=sag;
-		this.sad=sad;
+	// constructeurs
+	public ArbreBinaireChaine(T valeur, ArbreBinaire<T>sag ,ArbreBinaire<T>sad) {
+		this.valeur=valeur;
+		this.sag= sag;
+		this.sad= sad;
 	}
-	
+	public ArbreBinaireChaine(T valeur) {
+		this.valeur=valeur;
+		this.sag= ArbreBinaireChaine.arbreVide;
+		this.sad=ArbreBinaireChaine.arbreVide;
+	}
 	public static final ArbreBinaire arbreVide = new ArbreBinaireChaine();
-	
-			
-	
-	public ArbreBinaireChaine( T valeur ) {
-		this.valeur = valeur;
-		this.sag=ArbreBinaireChaine.arbreVide;
-		this.sad=ArbreBinaireChaine.arbreVide;
-	}
-	
-	
-	
-	
 	public ArbreBinaireChaine() {
-		this.valeur = null;
-		this.sag=ArbreBinaireChaine.arbreVide;
+		this.valeur=null;
+		this.sag= ArbreBinaireChaine.arbreVide;
 		this.sad=ArbreBinaireChaine.arbreVide;
 	}
-	
-	
+	@SuppressWarnings({ "rawtypes"})
 	public T valeur() {
 		return this.valeur;
 	}
-	
-	
-	
-	
-	public ArbreBinaire<T> sag() {
+	public ArbreBinaire<T> sag(){
 		return this.sag;
 	}
-	
-	public ArbreBinaire<T> sad() {
+	public ArbreBinaire<T> sad(){
 		return this.sad;
 	}
-	
-	
 	public boolean estVide() {
-		return this==ArbreBinaireChaine.arbreVide;
+		return this == ArbreBinaireChaine.arbreVide;
 	}
-	public void  ecrireArbre() {
-		System.out.println(this);
-		System.out.println("\n");
-	}
-
-
-	
-	private void  ecrireArbre(ArbreBinaireChaine a) {
-		if (!a.estVide()) {
-			System.out.println("(");
-			System.out.println(a.valeur().toString());
-			System.out.println(a.sag().toString());
-			System.out.println(a.sad().toString());
-			System.out.println(")");
-		}
-		
-		
-	}
-	
-	public int hauteur(ArbreBinaire a) {
-		
-		if (a.sag().estVide() && a.sad().estVide()) {
-			return 0;
-		}
-		else return hauteur(a)+1;
-		
-	}
-	
-	
 	public void ajouter(T valeurAjouter){
-		if(this.val) {
-			return ArbreBinaireChaine(valeurAjouter);
+		if(this.valeur==null && this.sag().estVide() && this.sad().estVide()) { //regarder si c'est nul 
+			this.valeur=valeurAjouter;
 		}
-		elseif((this.sag().estVide()) && (this.valeur().compareTo(valeurAjouter)>0)){
+		else if(this.valeur().compareTo(valeurAjouter)>0){//il faut creer un nouvel arbre
+			this.sag.ajouter(valeurAjouter);
+			
+		}else if((this.sad().estVide()) && (this.valeur().compareTo(valeurAjouter)<0)) {
+			this.sad.ajouter(valeurAjouter);
+		}
+	}
+
+	public  boolean rechercher(T valeurRechercher) {
+		if(this.valeur==null ) {
+			System.out.println("La valeur demandée n'est pas présente dans l'arbre");
+			return false;
+		}
+		else {
+			if(this.valeur.compareTo(valeurRechercher)==0 ) {
+				System.out.println("valeur trouvéé");
+				return true;
+			}
+			else if(this.valeur.compareTo(valeurRechercher)<0 && !this.sag.estVide() && this.sad.estVide()) {
+					return this.sag.rechercher(valeurRechercher);
+				}
+			else if (this.valeur.compareTo(valeurRechercher)>0 && !this.sad.estVide() && this.sag.estVide()){
+					return this.sad.rechercher(valeurRechercher);
+			}
+				else {
+					return false;
+				}
 			
 		}
 	}
-	
+	public void supprimer(T valeurSupprimer){// bouger les arbres
+		
+			if(this.valeur.compareTo(valeurSupprimer)==0 && this.sag.estVide() && this.sad.estVide() ) {
+				 this.valeur=null;
+			}
+			else if(this.valeur.compareTo(valeurSupprimer)<0 && !this.sag.estVide()) {
+				this.sag.supprimer(valeurSupprimer);
+			}else if(this.valeur.compareTo(valeurSupprimer)>0 && !this.sad.estVide()) {
+				this.sad.supprimer(valeurSupprimer);
+		}
+				
+	}
+	public void ecrireArbre() {//  3 parametre arbre x y 
+		PlancheADessin  pad = new PlancheADessin ();
+		double milieu = pad.getLargeur ()/2;
+		Dessinable  dessin = new CerclePlein(milieu , 80, 60,  PlancheADessin.GRIS_CLAIR );
+		Dessinable valeur1 = new Texte ( milieu-10 ,62 ,this.valeur.toString());
+		pad.ajouter(dessin);
+		pad.ajouter(valeur1);
+		Dessinable lignesag = new Ligne (milieu , 110 , milieu-90 , 170);//(x1,y1, x2,y2 vers le bas);
+		Dessinable lignesad = new Ligne (milieu , 110 , milieu+90 , 170);//(x1,y1, x2,y2);
+		Dessinable  sag = new CerclePlein(milieu-90 , 170, 60,  PlancheADessin.GRIS_CLAIR );
+		Dessinable  sad = new CerclePlein(milieu+90 , 170, 60,  PlancheADessin.GRIS_CLAIR );
+		Dessinable valeur2 = new Texte ( milieu-100,153 ,"2" );
+		Dessinable valeur3 = new Texte ( milieu+80 ,153 ,"4");
+		pad.ajouter(lignesag);
+		pad.ajouter(lignesad);
+		pad.ajouter(sag);
+		pad.ajouter(sad);
+		pad.ajouter(valeur2);
+		pad.ajouter(valeur3);
+	}
 
 }
+

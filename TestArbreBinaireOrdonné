@@ -1,0 +1,66 @@
+package projetJava;
+import java.util.*;
+import PaD.*;
+public class TestArbreBinaireOrdonné<T> {
+	@SuppressWarnings("rawtypes")
+	public static <T extends  Comparable > void main(String[] args) throws Exception {
+		ArbreBinaireOrdonné<Integer> Arbre= new ArbreBinaireOrdonné<Integer>();
+		Scanner sc= new Scanner(System.in);
+		Integer n =sc.nextInt();
+			
+		Arbre.ajouter(n);
+		Arbre.estFeuille();
+//		Arbre.rechercher(n);
+//		int x=300; // a mettre au milieu
+//		int y=60;
+//		Arbre.ecrireArbre(Arbre,  x, y);
+		sc.close();
+	}
+}
+			
+			
+			
+			
+			
+			
+
+//			boolean continuer =true;
+//			while(continuer) {
+//				System.out.println("Que voulez vous faire? ajouter?(1) supprimer?(2)");
+//				Scanner sc= new Scanner(System.in);
+//				int n =sc.nextInt();// renvoie le String essai
+//				if(n==1) {
+//					System.out.println("Quel valeur?");
+//					Scanner si= new Scanner(System.in);
+//					int q= si.nextInt();
+//					ArbreBinaireChaine<> A= new ArbreBinaireChaine(q);
+//					Ajouter();
+//					System.out.println("Voulez-vous continuer?(O/N)");
+//					Scanner su= new Scanner(System.in);
+//					String z= su.next();
+//					if(z=="N") {
+//						continuer =false;
+//						System.out.println("fin");
+//						break;
+//					}else {
+//						continuer =true;
+//						break;
+//					}
+//				
+//				}else if(n==2){
+//				System.out.println("supprimer");
+//				}else if(n==3){
+//				System.out.println("rechercher");
+//				}
+//				sc.close();
+//			}
+
+// afaire
+//ajouter mettre les nouveaux arbres
+//est feuille
+//getsag(la valeur)
+//supprimer
+//rechercher
+//ecrirearbre
+		
+		

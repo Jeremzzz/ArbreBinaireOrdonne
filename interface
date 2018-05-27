@@ -1,12 +1,13 @@
 package td7;
-
+@SuppressWarnings("rawtypes")
 public interface ArbreBinaire<T> {
 	public T valeur();
 	public ArbreBinaire<T> sag();
 	public ArbreBinaire<T> sad();
 	public boolean estVide();
-	public void ecrireArbre();
+	public void ecrireArbre( ArbreBinaireOrdonné a,int x,int y );
 	public void ajouter(T valeurAjouter);
 	public  boolean rechercher(T valeurRechercher);
 	public void supprimer(T valeurSupprimer);
+		public boolean estFeuille();
 }
